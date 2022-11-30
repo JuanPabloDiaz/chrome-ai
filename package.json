@@ -1,0 +1,27 @@
+{
+  "name": "platzi_yardsale",
+  "version": "1.0.0",
+  "description": "react eshop",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanPabloDiaz/platzi_YardSale.git"
+  },
+  "keywords": [
+    "react",
+    "javascript"
+  ],
+  "author": "Juan Diaz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JuanPabloDiaz/platzi_YardSale/issues"
+  },
+  "homepage": "https://github.com/JuanPabloDiaz/platzi_YardSale#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
