@@ -2,6 +2,19 @@
 
 A comprehensive demonstration of Chrome's experimental Built-in AI APIs using Astro and React. This project showcases the Translator, Summarizer, Prompt API (Language Model), Writer, Rewriter, and Language Detector APIs.
 
+## 🚀 Quick Start
+
+**Just want to test the APIs locally? Follow these 4 simple steps:**
+
+1. **Download Chrome Canary/Dev/Beta** (version 138+)
+2. **Enable flags**: Go to `chrome://flags`, search for "ai", enable all AI-related flags
+3. **Download model**: Go to `chrome://components`, update "Optimization Guide On Device Model"
+4. **Test it**: Clone this repo, run `npm install && npm run dev`, open `http://localhost:4321`
+
+**No registration required for localhost testing!**
+
+---
+
 ## 🚀 Features
 
 - **Translator API**: Translate text between different languages
@@ -20,32 +33,77 @@ A comprehensive demonstration of Chrome's experimental Built-in AI APIs using As
 
 ### Setup Chrome for Built-in AI APIs
 
-1. **Join the Early Preview Program**
-   - Visit [Chrome AI documentation](https://developer.chrome.com/docs/ai/get-started)
-   - Sign up for the Early Preview Program (EPP)
+#### Option 1: Local Development (Recommended for Testing)
 
-2. **Enable Feature Flags**
-   Navigate to `chrome://flags` and enable:
-   - `#prompt-api-for-gemini-nano`
-   - `#optimization-guide-on-device-model`
-   - `#translation-api`
-   - `#summarization-api`
-   - `#writer-api`
-   - `#rewriter-api`
-   - `#language-detection-api`
+**No registration required!** For testing on `localhost`, simply enable Chrome flags:
 
-3. **Update Gemini Nano Component**
+1. **Enable Feature Flags**
+
+   Navigate to `chrome://flags` and enable these flags:
+   - `#prompt-api-for-gemini-nano` → **Enabled**
+   - `#optimization-guide-on-device-model` → **Enabled**
+   - `#translation-api` → **Enabled**
+   - `#summarization-api` → **Enabled**
+   - `#writer-api` → **Enabled**
+   - `#rewriter-api` → **Enabled**
+   - `#language-detection-api` → **Enabled**
+
+2. **Restart Chrome**
+
+   Click "Relaunch" button that appears at the bottom of the flags page
+
+3. **Download Gemini Nano Model**
    - Go to `chrome://components`
    - Find "Optimization Guide On Device Model"
    - Click "Check for update"
-   - Restart Chrome after update
+   - Wait for download to complete (may take several minutes)
+   - Restart Chrome again
 
 4. **Verify Setup**
+
+   Open Chrome DevTools Console and run:
+
    ```javascript
-   // Open Chrome DevTools and run:
-   const caps = await ai.languageModel.capabilities();
-   console.log(caps.available); // Should return "readily"
+   // Check if Language Model is available
+   await ai.languageModel.capabilities();
+   // Should return: { available: "readily" }
+
+   // Test basic functionality
+   const session = await ai.languageModel.create();
+   await session.prompt("Hello!");
    ```
+
+#### Option 2: Web Deployment (For Production)
+
+**Registration required** for deploying to a public domain:
+
+1. **Complete Local Setup First** (follow Option 1 above)
+
+2. **Join Early Preview Program (EPP)**
+   - Visit: [Chrome AI Early Preview Program](https://developer.chrome.com/docs/ai/join-epp)
+   - Sign up with your Google account
+   - Wait for approval (may take a few days)
+
+3. **Register for Origin Trial** (if deploying to web)
+   - Visit: [Chrome Origin Trials](https://developer.chrome.com/origintrials)
+   - Find active AI API trials
+   - Register your domain (e.g., `https://yourdomain.com`)
+   - Get your origin trial token
+   - Add token to your website's `<head>`:
+
+   ```html
+   <meta http-equiv="origin-trial" content="YOUR_TOKEN_HERE" />
+   ```
+
+#### Important Notes
+
+- **Hardware Requirements**:
+  - Desktop only (Windows 10+, macOS 13+, or Linux)
+  - At least 22GB free storage
+  - GPU with >4GB VRAM
+  - Unmetered internet connection
+- **Chrome Version**: 138+ (Canary, Dev, or Beta recommended)
+- **APIs Work on localhost**: No registration needed for local development
 
 ## 🛠️ Installation
 
@@ -146,22 +204,51 @@ The application shows real-time status for each API:
 
 ## 🔧 Troubleshooting
 
-### Common Issues
+### Registration & Setup Issues
+
+1. **"I don't know how to register"**
+   - **For localhost testing**: No registration needed! Just enable Chrome flags (see Option 1 above)
+   - **For web deployment**: You need EPP + Origin Trial registration (see Option 2 above)
+
+2. **Early Preview Program (EPP) Access**
+   - Visit: https://developer.chrome.com/docs/ai/join-epp
+   - Sign in with Google account
+   - Fill out the application form
+   - Wait for approval email (usually 1-3 business days)
+
+3. **Origin Trial Registration Steps**
+   - Go to: https://developer.chrome.com/origintrials
+   - Search for "Built-in AI" or "Gemini Nano" trials
+   - Click "Register" on the active trial
+   - Enter your website domain (e.g., `https://mysite.com`)
+   - Copy the generated token
+   - Add to your HTML: `<meta http-equiv="origin-trial" content="TOKEN_HERE">`
+
+### Common Technical Issues
 
 1. **APIs not available**
    - Ensure you're using Chrome 138+ desktop
-   - Verify all required flags are enabled
-   - Check that Gemini Nano component is updated
+   - Verify all required flags are enabled at `chrome://flags`
+   - Check that Gemini Nano component is updated at `chrome://components`
+   - Restart Chrome completely after flag changes
 
 2. **Model download required**
    - First use of APIs may require model download
-   - This happens automatically but may take time
-   - Ensure stable internet connection
+   - This happens automatically but may take time (several minutes)
+   - Ensure stable internet connection and sufficient storage (22GB+)
+   - Check download progress at `chrome://components`
 
 3. **Console errors**
    - Check Chrome DevTools for specific error messages
    - Verify feature flags are properly set
    - Try restarting Chrome after flag changes
+   - Clear Chrome cache and restart
+
+4. **Hardware requirements not met**
+   - Desktop only: Windows 10+, macOS 13+, or Linux
+   - Minimum 22GB free storage space
+   - GPU with more than 4GB VRAM
+   - Unmetered internet connection (not cellular/mobile data)
 
 ### Debug Commands
 
