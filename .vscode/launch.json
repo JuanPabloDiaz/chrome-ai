@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "./node_modules/.bin/astro dev",
+      "name": "Development server",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "name": "Launch Chrome with AI APIs",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4322",
+      "webRoot": "${workspaceFolder}/src",
+      "runtimeArgs": [
+        "--enable-features=Prompt-API-for-Gemini-Nano,OptimizationGuideOnDeviceModel",
+        "--user-data-dir=/tmp/chrome-ai-demo"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "chrome-ai-api",
+  "type": "module",
+  "author": "Juan Diaz",
+  "license": "MIT",
+  "description": "Demo of Chrome's built-in AI APIs using Astro and React",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "typecheck": "astro check",
+    "clean": "rm -rf dist .astro node_modules package-lock.json && npm install",
+    "test": "vitest",
+    "check-all": "npm run typecheck && npm run lint && npm run format:check"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "astro": "^5.11.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^9.30.1",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "vitest": "^3.2.4"
+  }
+}

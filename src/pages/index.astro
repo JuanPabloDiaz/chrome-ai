@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AIHub from '../components/AIHub.tsx';
+---
+
+<Layout title="Chrome Built-in AI APIs Demo">
+  <main>
+    <h1>Chrome Built-in AI APIs Demo</h1>
+    <p class="intro">
+      This demo showcases Chrome's experimental Built-in AI APIs.
+      <strong>Chrome 138+ desktop required</strong> with flags enabled.
+    </p>
+
+    <div class="compatibility-notice">
+      <h2>🚀 Setup Required</h2>
+      <ol>
+        <li>Use Chrome Canary, Dev, or Beta (v138+)</li>
+        <li>Enable flags: <code>chrome://flags/#prompt-api-for-gemini-nano</code></li>
+        <li>Update Gemini Nano: <code>chrome://components</code></li>
+        <li>
+          Join the <a href="https://developer.chrome.com/docs/ai/get-started" target="_blank"
+            >Early Preview Program</a
+          >
+        </li>
+      </ol>
+    </div>
+
+    <AIHub client:load />
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #2563eb;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+  }
+
+  .compatibility-notice {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 1px solid #f59e0b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .compatibility-notice h2 {
+    margin-top: 0;
+    color: #92400e;
+  }
+
+  .compatibility-notice ol {
+    margin: 1rem 0 0;
+  }
+
+  .compatibility-notice code {
+    background: #fbbf24;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  .compatibility-notice a {
+    color: #92400e;
+    text-decoration: underline;
+  }
+</style>
