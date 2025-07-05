@@ -31,7 +31,7 @@ A comprehensive demonstration of Chrome's experimental Built-in AI APIs using As
 - Chrome Canary, Dev, or Beta (version 138+ recommended)
 - Desktop only (mobile not yet supported)
 
-### Setup Chrome for Built-in AI APIs
+### Setup Chrome for [Built-in AI APIs](https://developer.chrome.com/docs/ai/built-in-apis)
 
 #### Option 1: Local Development (Recommended for Testing)
 
@@ -231,7 +231,7 @@ The application shows real-time status for each API:
    - Fill out the application form
    - Wait for approval email (usually 1-3 business days)
 
-3. **Origin Trial Registration Steps**
+5. **Origin Trial Registration Steps**
    - Go to: https://developer.chrome.com/origintrials
    - Search for "Built-in AI" or "Gemini Nano" trials
    - Click "Register" on the active trial
