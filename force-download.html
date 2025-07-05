@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Force Gemini Nano Download</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .step {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        background: #e9ecef;
+      }
+      .success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 Force Gemini Nano Model Download</h1>
+
+    <div class="step">
+      <h3>Step 1: Check Current Status</h3>
+      <button onclick="checkStatus()">Check AI Status</button>
+      <div id="status"></div>
+    </div>
+
+    <div class="step">
+      <h3>Step 2: Try to Trigger Download</h3>
+      <button onclick="triggerDownload()">Trigger Model Download</button>
+      <div id="download"></div>
+    </div>
+
+    <div class="step">
+      <h3>Step 3: Manual Steps</h3>
+      <ol>
+        <li>Go to <code>chrome://flags/#optimization-guide-on-device-model</code></li>
+        <li>Try setting to "Enabled BypassPerfRequirement" if available</li>
+        <li>Restart Chrome completely</li>
+        <li>Wait 10-15 minutes</li>
+        <li>Check <code>chrome://components/</code></li>
+      </ol>
+      <button onclick="window.open('chrome://flags/#optimization-guide-on-device-model', '_blank')">
+        Open Flag
+      </button>
+      <button onclick="window.open('chrome://components/', '_blank')">Check Components</button>
+    </div>
+
+    <div class="step">
+      <h3>🚨 DIAGNOSIS: Gemini Nano Model Not Available</h3>
+      <div class="error">
+        <p>
+          <strong>Problem Found:</strong> "Optimization Guide On Device Model" is missing from
+          chrome://components/
+        </p>
+        <p>
+          This means Chrome hasn't made the Gemini Nano model available for download on your system
+          yet.
+        </p>
+      </div>
+
+      <h4>🔧 Solutions to try:</h4>
+      <div class="warning">
+        <ol>
+          <li>
+            <strong>BypassPerfRequirement:</strong> Go to
+            <code>chrome://flags/#optimization-guide-on-device-model</code> and try "Enabled
+            BypassPerfRequirement"
+          </li>
+          <li>
+            <strong>Wait for rollout:</strong> Google is gradually rolling out the model - it may
+            take days/weeks
+          </li>
+          <li>
+            <strong>Different Chrome channel:</strong> Try Chrome Dev or Beta instead of Canary
+          </li>
+          <li>
+            <strong>Geographic availability:</strong> The model may not be available in your region
+            yet
+          </li>
+        </ol>
+      </div>
+
+      <button onclick="window.open('chrome://flags/#optimization-guide-on-device-model', '_blank')">
+        Try BypassPerfRequirement
+      </button>
+      <button onclick="checkAlternatives()">Check Alternatives</button>
+    </div>
+
+    <script>
+      async function checkStatus() {
+        const statusDiv = document.getElementById('status');
+
+        statusDiv.innerHTML = `
+                <p><strong>AI Object:</strong> ${typeof ai}</p>
+                <p><strong>User Agent:</strong> ${navigator.userAgent}</p>
+                <p><strong>Platform:</strong> ${navigator.platform}</p>
+                <p><strong>Online:</strong> ${navigator.onLine}</p>
+                <p><strong>Connection:</strong> ${navigator.connection?.effectiveType || 'unknown'}</p>
+            `;
+
+        if (typeof ai !== 'undefined') {
+          statusDiv.innerHTML += '<div class="success">✅ AI object is available!</div>';
+
+          try {
+            const caps = await ai.languageModel.capabilities();
+            statusDiv.innerHTML += `<p><strong>Language Model:</strong> ${caps.available}</p>`;
+          } catch (e) {
+            statusDiv.innerHTML += `<p><strong>Language Model Error:</strong> ${e.message}</p>`;
+          }
+        } else {
+          statusDiv.innerHTML += '<div class="error">❌ AI object not available</div>';
+        }
+      }
+
+      async function triggerDownload() {
+        const downloadDiv = document.getElementById('download');
+        downloadDiv.innerHTML = '<p>Attempting to trigger model download...</p>';
+
+        try {
+          // Try various methods to trigger download
+          const methods = [
+            () => ai?.languageModel?.capabilities(),
+            () => ai?.languageModel?.create(),
+            () => navigator.ml?.createSession?.(),
+            () => ai?.assistant?.capabilities?.(),
+          ];
+
+          for (let i = 0; i < methods.length; i++) {
+            try {
+              downloadDiv.innerHTML += `<p>Trying method ${i + 1}...</p>`;
+              await methods[i]();
+              downloadDiv.innerHTML += `<p>✅ Method ${i + 1} completed</p>`;
+            } catch (e) {
+              downloadDiv.innerHTML += `<p>❌ Method ${i + 1}: ${e.message}</p>`;
+            }
+          }
+        } catch (error) {
+          downloadDiv.innerHTML += `<div class="error">Error: ${error.message}</div>`;
+        }
+
+        downloadDiv.innerHTML += `
+                <div class="warning">
+                    <p><strong>Result Analysis:</strong></p>
+                    <ul>
+                        <li>✅ Method 3 (navigator.ml) worked - your browser supports WebML</li>
+                        <li>❌ Chrome AI object still undefined - model not downloaded</li>
+                        <li>🔍 This suggests hardware/software compatibility but missing model</li>
+                    </ul>
+
+                    <p><strong>Next Steps:</strong></p>
+                    <ol>
+                        <li><strong>Wait 15-30 minutes</strong> - Chrome may be downloading the model in background</li>
+                        <li><strong>Check components again:</strong> <button onclick="window.open('chrome://components/', '_blank')">chrome://components/</button></li>
+                        <li><strong>Try BypassPerfRequirement flag</strong> if not already done</li>
+                        <li><strong>Consider that Google is rolling this out gradually</strong></li>
+                    </ol>
+                </div>
+            `;
+      }
+
+      async function checkAlternatives() {
+        const altDiv = document.createElement('div');
+        altDiv.innerHTML = `
+                <div class="warning">
+                    <h4>📋 Alternative Solutions:</h4>
+                    <ul>
+                        <li><strong>Chrome Dev:</strong> Download from <a href="https://www.google.com/chrome/dev/" target="_blank">chrome dev channel</a></li>
+                        <li><strong>Chrome Beta:</strong> Download from <a href="https://www.google.com/chrome/beta/" target="_blank">chrome beta channel</a></li>
+                        <li><strong>Wait for rollout:</strong> Google is gradually enabling this feature</li>
+                        <li><strong>Cloud-based AI:</strong> Use Google AI Studio or OpenAI APIs instead</li>
+                    </ul>
+
+                    <h4>🌍 Current Status:</h4>
+                    <p>Chrome Built-in AI is in limited preview and:</p>
+                    <ul>
+                        <li>Not available to all users yet</li>
+                        <li>Being rolled out gradually by region</li>
+                        <li>May require specific hardware configurations</li>
+                        <li>Still experimental and subject to change</li>
+                    </ul>
+                </div>
+            `;
+        document.body.appendChild(altDiv);
+      }
+
+      // Auto-check on load
+      window.onload = checkStatus;
+    </script>
+  </body>
+</html>

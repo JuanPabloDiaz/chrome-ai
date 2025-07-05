@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <title>AI Object Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .result {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+      .success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🧪 Chrome AI Object Test</h1>
+    <button onclick="testAI()">Test AI Object</button>
+    <div id="result"></div>
+
+    <script>
+      function testAI() {
+        const resultDiv = document.getElementById('result');
+
+        console.log('Testing AI object...');
+        console.log('typeof ai:', typeof ai);
+        console.log('window.ai:', window.ai);
+
+        // Check if we're in the right context
+        const isLocalhost =
+          window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isFileProtocol = window.location.protocol === 'file:';
+
+        if (typeof ai === 'undefined') {
+          resultDiv.innerHTML = `
+                    <div class="result error">
+                        ❌ AI object is undefined<br>
+                        <strong>typeof ai:</strong> ${typeof ai}<br>
+                        <strong>window.ai:</strong> ${window.ai}<br>
+                        <br>
+                        <strong>Location:</strong> ${window.location.href}<br>
+                        <strong>Protocol:</strong> ${window.location.protocol}<br>
+                        <strong>User Agent:</strong> ${navigator.userAgent}<br>
+                        <br>
+                        <div style="background: #f8d7da; padding: 15px; margin: 10px 0; border-radius: 5px; color: #721c24;">
+                            <h3>🚨 CRITICAL: Manual Flag Check Required</h3>
+                            <p><strong>The flags might not be properly enabled. Follow these EXACT steps:</strong></p>
+                            <ol>
+                                <li><strong>Open NEW tab:</strong> <code>chrome://flags/</code></li>
+                                <li><strong>Search "prompt-api"</strong> → Must show <strong>"Enabled"</strong></li>
+                                <li><strong>Search "translation-api"</strong> → Must show <strong>"Enabled"</strong></li>
+                                <li><strong>Search "optimization-guide"</strong> → Must show <strong>"Enabled"</strong></li>
+                                <li><strong>Search "summarization"</strong> → Must show <strong>"Enabled"</strong></li>
+                                <li><strong>Search "writer-api"</strong> → Must show <strong>"Enabled"</strong></li>
+                                <li><strong>Search "rewriter-api"</strong> → Must show <strong>"Enabled"</strong></li>
+                                <li><strong>Search "language-detection"</strong> → Must show <strong>"Enabled"</strong></li>
+                            </ol>
+                            <p><strong>If ANY show "Default":</strong></p>
+                            <ul>
+                                <li>Change dropdown to "Enabled"</li>
+                                <li>Click blue "Relaunch" button</li>
+                                <li>Wait for complete restart</li>
+                            </ul>
+                        </div>
+                        <div style="background: #dc3545; padding: 15px; margin: 10px 0; border-radius: 5px; color: white;">
+                            <h3>🚨 CRITICAL: Gemini Nano Model Missing</h3>
+                            <p><strong>The model isn't available for download. Try these fixes:</strong></p>
+
+                            <h4>Method 1: Force Model Download</h4>
+                            <ol>
+                                <li><strong>Open:</strong> <code>chrome://flags/#optimization-guide-on-device-model</code></li>
+                                <li><strong>Set to:</strong> "Enabled BypassPerfRequirement" (if available)</li>
+                                <li><strong>Restart Chrome completely</strong></li>
+                                <li><strong>Wait 5-10 minutes for automatic download</strong></li>
+                                <li><strong>Check:</strong> <code>chrome://components/</code> for the model</li>
+                            </ol>
+
+                            <h4>Method 2: Hardware Check</h4>
+                            <p>Chrome AI requires:</p>
+                            <ul>
+                                <li>✅ Desktop only (not mobile)</li>
+                                <li>⚠️ 22GB+ free storage</li>
+                                <li>⚠️ GPU with 4GB+ VRAM</li>
+                                <li>⚠️ Unmetered internet connection</li>
+                                <li>✅ macOS 13+ (you have ${navigator.platform})</li>
+                            </ul>
+
+                            <h4>Method 3: Manual Trigger</h4>
+                            <p>In Chrome DevTools Console, try:</p>
+                            <code style="background: rgba(0,0,0,0.1); padding: 5px; display: block; margin: 5px 0;">
+                                navigator.ml?.createSession?.()
+                            </code>
+                        </div>
+
+                        <div style="background: #fff3cd; padding: 15px; margin: 10px 0; border-radius: 5px; color: #856404;">
+                            <h3>🔧 Alternative: Download the Model</h3>
+                            <p>Sometimes AI object only appears after downloading Gemini Nano:</p>
+                            <ol>
+                                <li><strong>Open:</strong> <code>chrome://components/</code></li>
+                                <li><strong>Find:</strong> "Optimization Guide On Device Model"</li>
+                                <li><strong>Click:</strong> "Check for update"</li>
+                                <li><strong>Wait:</strong> For download (may take 5-10 minutes)</li>
+                                <li><strong>Restart Chrome and test again</strong></li>
+                            </ol>
+                        </div>
+                        <div style="background: #fff3cd; padding: 15px; margin: 10px 0; border-radius: 5px; color: #856404;">
+                            <h3>🔧 Fix Steps (Chrome ${navigator.userAgent.match(/Chrome\/([0-9.]+)/)?.[1] || 'Unknown'}):</h3>
+                            <ol>
+                                <li><strong>Open flags:</strong> <a href="chrome://flags/" target="_blank">chrome://flags/</a></li>
+                                <li><strong>Search "ai"</strong> and enable ALL these flags:</li>
+                                <ul>
+                                    <li>✅ prompt-api-for-gemini-nano → <strong>Enabled</strong></li>
+                                    <li>✅ translation-api → <strong>Enabled</strong></li>
+                                    <li>✅ optimization-guide-on-device-model → <strong>Enabled</strong></li>
+                                    <li>✅ summarization-api-for-gemini-nano → <strong>Enabled</strong></li>
+                                    <li>✅ writer-api-for-gemini-nano → <strong>Enabled</strong></li>
+                                    <li>✅ rewriter-api-for-gemini-nano → <strong>Enabled</strong></li>
+                                    <li>✅ language-detection-api → <strong>Enabled</strong></li>
+                                </ul>
+                                <li><strong>Click blue "Relaunch" button</strong> at bottom of flags page</li>
+                                <li><strong>Come back here and refresh this page</strong></li>
+                            </ol>
+                        </div>
+                        <button onclick="window.open('chrome://flags/', '_blank')" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            🔧 Open Chrome Flags
+                        </button>
+                    </div>
+                `;
+        } else {
+          resultDiv.innerHTML = `
+                    <div class="result success">
+                        ✅ AI object is available!<br>
+                        <strong>typeof ai:</strong> ${typeof ai}<br>
+                        <strong>AI object:</strong> ${JSON.stringify(Object.keys(ai || {}))}<br>
+                    </div>
+                `;
+        }
+      }
+
+      // Auto-test on load
+      window.onload = () => {
+        setTimeout(testAI, 1000);
+      };
+    </script>
+  </body>
+</html>

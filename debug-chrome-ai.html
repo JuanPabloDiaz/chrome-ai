@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chrome AI Debug Tool</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .status {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .ready {
+        background: #d4edda;
+        color: #155724;
+      }
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+      button {
+        margin: 5px;
+        padding: 8px 16px;
+      }
+      pre {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 Chrome AI Debug Tool</h1>
+    <p>Use this tool to diagnose Chrome AI API issues</p>
+
+    <button onclick="checkAllAPIs()">Check All APIs</button>
+    <button onclick="checkFlags()">Check Flags Status</button>
+    <button onclick="openFlags()">Open Chrome Flags</button>
+    <button onclick="openAllFlagsAtOnce()">🚨 ENABLE ALL FLAGS NOW</button>
+    <button onclick="downloadModel()">Force Model Download</button>
+
+    <div id="results"></div>
+
+    <script>
+      async function checkAllAPIs() {
+        const results = document.getElementById('results');
+        results.innerHTML = '<h3>Checking APIs...</h3>';
+
+        // First check if ai object exists at all
+        if (typeof ai === 'undefined') {
+          results.innerHTML += `
+                    <div class="status error">
+                        ❌ <strong>Chrome AI not available!</strong><br>
+                        The 'ai' object is not defined. This means:
+                        <ul>
+                            <li>Chrome flags are not enabled</li>
+                            <li>Chrome needs to be restarted</li>
+                            <li>You're not using Chrome Canary/Dev/Beta</li>
+                        </ul>
+                        <button onclick="checkFlags()">Show Required Flags</button>
+                    </div>
+                `;
+          return;
+        }
+
+        results.innerHTML += `
+                <div class="status ready">
+                    ✅ <strong>Chrome AI object is available!</strong>
+                </div>
+            `;
+
+        const apis = [
+          { name: 'Language Model', check: () => ai.languageModel?.capabilities() },
+          {
+            name: 'Translator',
+            check: () =>
+              ai.translator?.canTranslate({ sourceLanguage: 'en', targetLanguage: 'es' }),
+          },
+          { name: 'Summarizer', check: () => ai.summarizer?.capabilities() },
+          { name: 'Writer', check: () => ai.writer?.capabilities() },
+          { name: 'Rewriter', check: () => ai.rewriter?.capabilities() },
+          { name: 'Language Detector', check: () => ai.languageDetector?.capabilities() },
+        ];
+
+        for (const api of apis) {
+          try {
+            const result = await api.check();
+            const status = typeof result === 'object' ? result.available || 'available' : result;
+            const className = status === 'readily' || status === 'available' ? 'ready' : 'warning';
+
+            results.innerHTML += `
+                        <div class="status ${className}">
+                            ✅ ${api.name}: ${status}
+                            <pre>${JSON.stringify(result, null, 2)}</pre>
+                        </div>
+                    `;
+          } catch (error) {
+            results.innerHTML += `
+                        <div class="status error">
+                            ❌ ${api.name}: ${error.message}
+                        </div>
+                    `;
+          }
+        }
+      }
+
+      function openFlags() {
+        const flagUrls = [
+          'chrome://flags/#prompt-api-for-gemini-nano',
+          'chrome://flags/#translation-api',
+          'chrome://flags/#optimization-guide-on-device-model',
+          'chrome://flags/#summarization-api',
+          'chrome://flags/#writer-api',
+          'chrome://flags/#rewriter-api',
+          'chrome://flags/#language-detection-api',
+        ];
+
+        document.getElementById('results').innerHTML = `
+                <div class="status warning">
+                    <h3>🔧 Enable These Flags (Click Each Link):</h3>
+                    ${flagUrls
+                      .map(
+                        url => `
+                        <div style="margin: 5px 0;">
+                            <a href="${url}" target="_blank" style="color: #007bff;">
+                                📋 ${url}
+                            </a> → Set to <strong>Enabled</strong>
+                        </div>
+                    `
+                      )
+                      .join('')}
+                    <br>
+                    <div class="status error">
+                        <strong>⚠️ After enabling ALL flags above:</strong><br>
+                        1. Close ALL Chrome windows<br>
+                        2. Restart Chrome Canary completely<br>
+                        3. Come back to this debug tool
+                    </div>
+                </div>
+            `;
+      }
+
+      function openAllFlagsAtOnce() {
+        const flags = [
+          'prompt-api-for-gemini-nano',
+          'translation-api', 
+          'optimization-guide-on-device-model',
+          'summarization-api',
+          'writer-api',
+          'rewriter-api',
+          'language-detection-api'
+        ];
+        
+        document.getElementById('results').innerHTML = `
+          <div class="status error">
+            <h2>🚨 CRITICAL: Enable These Flags NOW</h2>
+            <p><strong>Copy and paste each URL below into Chrome's address bar:</strong></p>
+            ${flags.map((flag, index) => `
+              <div style="background: #fff; margin: 10px 0; padding: 10px; border: 2px solid #dc3545; border-radius: 5px;">
+                <strong>Step ${index + 1}:</strong>
+                <br>
+                <code style="background: #f8f9fa; padding: 5px; display: block; margin: 5px 0; font-size: 14px;">
+                  chrome://flags/#${flag}
+                </code>
+                <strong>→ Set dropdown to "Enabled"</strong>
+              </div>
+            `).join('')}
+            
+            <div style="background: #dc3545; color: white; padding: 15px; margin: 20px 0; border-radius: 5px;">
+              <h3>🔄 AFTER ENABLING ALL FLAGS:</h3>
+              <ol>
+                <li><strong>Click "Relaunch" button</strong> that appears at bottom of flags page</li>
+                <li><strong>OR Close ALL Chrome windows and restart Chrome Canary</strong></li>
+                <li><strong>Come back to this debug tool</strong></li>
+                <li><strong>Click "Check All APIs" again</strong></li>
+              </ol>
+            </div>
+          </div>
+        `;
+      }
+
+      function checkFlags() {
+        const flagsToCheck = [
+          'prompt-api-for-gemini-nano',
+          'translation-api',
+          'optimization-guide-on-device-model',
+          'summarization-api',
+          'writer-api',
+          'rewriter-api',
+          'language-detection-api',
+        ];
+
+        let flagsInstructions = '<h3>Required Chrome Flags:</h3>';
+        flagsToCheck.forEach(flag => {
+          flagsInstructions += `
+                    <div class="status warning">
+                        📋 chrome://flags/#${flag} → <strong>Enabled</strong>
+                    </div>
+                `;
+        });
+
+        flagsInstructions += `
+                <div class="status ready">
+                    💡 After enabling all flags, restart Chrome completely!
+                </div>
+            `;
+
+        document.getElementById('results').innerHTML = flagsInstructions;
+      }
+
+      function downloadModel() {
+        document.getElementById('results').innerHTML = `
+                <div class="status warning">
+                    <h3>Manual Model Download Steps:</h3>
+                    <ol>
+                        <li>Open: <strong>chrome://components</strong></li>
+                        <li>Find: <strong>"Optimization Guide On Device Model"</strong></li>
+                        <li>Click: <strong>"Check for update"</strong></li>
+                        <li>Wait for download to complete</li>
+                        <li>Restart Chrome</li>
+                    </ol>
+                </div>
+            `;
+      }
+
+      // Auto-check on load
+      window.onload = () => {
+        setTimeout(checkAllAPIs, 1000);
+      };
+    </script>
+  </body>
+</html>
