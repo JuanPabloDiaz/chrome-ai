@@ -210,7 +210,22 @@ The application shows real-time status for each API:
    - **For localhost testing**: No registration needed! Just enable Chrome flags (see Option 1 above)
    - **For web deployment**: You need EPP + Origin Trial registration (see Option 2 above)
 
-2. **Early Preview Program (EPP) Access**
+2. **"Optimization Guide On Device Model" missing from chrome://components**
+   - **Most common issue**: The Gemini Nano model isn't available for download yet
+   - **Solutions to try**:
+     - Go to `chrome://flags/#optimization-guide-on-device-model`
+     - Try setting to "Enabled BypassPerfRequirement" if available
+     - Try Chrome Dev or Beta instead of Canary
+     - Wait for gradual rollout (may take days/weeks)
+   - **Why this happens**: Google is rolling out the model gradually by region and hardware
+
+3. **AI object is undefined (`typeof ai === 'undefined'`)**
+   - **Root cause**: Missing Gemini Nano model (see issue #2 above)
+   - **Quick test**: Run `navigator.ml?.createSession?.()` in console
+     - If this works but `ai` is undefined, it's a model availability issue
+   - **Hardware requirements**: 22GB+ storage, 4GB+ GPU VRAM, unmetered connection
+
+4. **Early Preview Program (EPP) Access**
    - Visit: https://developer.chrome.com/docs/ai/join-epp
    - Sign in with Google account
    - Fill out the application form

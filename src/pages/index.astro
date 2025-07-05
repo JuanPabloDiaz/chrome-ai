@@ -21,13 +21,71 @@ import AIHub from '../components/AIHub.tsx';
           >, Dev, or Beta (v138+)
         </li>
         <li>Enable flags: <code>chrome://flags/#prompt-api-for-gemini-nano</code></li>
-        <li>Update Gemini Nano: <code>chrome://components</code></li>
+        <li>
+          <strong>CRITICAL:</strong> Download Gemini Nano model at <code>chrome://components</code>
+          <br /><small
+            >⚠️ If "Optimization Guide On Device Model" is missing, see troubleshooting below</small
+          >
+        </li>
         <li>
           Join the <a href="https://developer.chrome.com/docs/ai/get-started" target="_blank"
             >Early Preview Program</a
           >
         </li>
       </ol>
+    </div>
+
+    <div class="troubleshooting-notice">
+      <h2>🔧 Troubleshooting: Model Not Available</h2>
+      <p><strong>If Chrome AI APIs show as "Unsupported" or `ai` object is undefined:</strong></p>
+      <details>
+        <summary>Click to see solutions</summary>
+        <div class="troubleshooting-content">
+          <h3>Problem: Missing Gemini Nano Model</h3>
+          <p>
+            The most common issue is that "Optimization Guide On Device Model" doesn't appear in <code
+              >chrome://components</code
+            >.
+          </p>
+
+          <h4>Solutions to try:</h4>
+          <ol>
+            <li>
+              <strong>Try BypassPerfRequirement:</strong>
+              <br />Go to <code>chrome://flags/#optimization-guide-on-device-model</code>
+              <br />Set to "Enabled BypassPerfRequirement" if available
+              <br />Restart Chrome and wait 15-30 minutes
+            </li>
+            <li>
+              <strong>Try different Chrome channel:</strong>
+              <br />Download <a href="https://www.google.com/chrome/dev/" target="_blank"
+                >Chrome Dev</a
+              > or <a href="https://www.google.com/chrome/beta/" target="_blank">Chrome Beta</a>
+              <br />Some channels may have better model availability
+            </li>
+            <li>
+              <strong>Wait for gradual rollout:</strong>
+              <br />Google is rolling out the model gradually by region and hardware
+              <br />It may take days or weeks to become available
+            </li>
+            <li>
+              <strong>Check system requirements:</strong>
+              <br />• Desktop only (Windows 10+, macOS 13+, Linux)
+              <br />• 22GB+ free storage
+              <br />• GPU with 4GB+ VRAM
+              <br />• Unmetered internet connection
+            </li>
+          </ol>
+
+          <h4>Alternative: Cloud-based AI</h4>
+          <p>While waiting for Chrome's built-in AI, consider:</p>
+          <ul>
+            <li><a href="https://ai.google.dev/" target="_blank">Google AI Studio</a></li>
+            <li><a href="https://platform.openai.com/" target="_blank">OpenAI API</a></li>
+            <li><a href="https://www.anthropic.com/" target="_blank">Anthropic Claude</a></li>
+          </ul>
+        </div>
+      </details>
     </div>
 
     <AIHub client:load />
@@ -80,6 +138,57 @@ import AIHub from '../components/AIHub.tsx';
 
   .compatibility-notice a {
     color: #92400e;
+    text-decoration: underline;
+  }
+
+  .troubleshooting-notice {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border: 1px solid #ef4444;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .troubleshooting-notice h2 {
+    margin-top: 0;
+    color: #dc2626;
+  }
+
+  .troubleshooting-notice details {
+    margin-top: 1rem;
+  }
+
+  .troubleshooting-notice summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #dc2626;
+    padding: 0.5rem 0;
+  }
+
+  .troubleshooting-notice summary:hover {
+    text-decoration: underline;
+  }
+
+  .troubleshooting-content {
+    padding: 1rem 0;
+    border-top: 1px solid #f87171;
+    margin-top: 0.5rem;
+  }
+
+  .troubleshooting-content h3, .troubleshooting-content h4 {
+    color: #dc2626;
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  .troubleshooting-content code {
+    background: #fca5a5;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  .troubleshooting-content a {
+    color: #dc2626;
     text-decoration: underline;
   }
 </style>
