@@ -3,23 +3,23 @@
 
 export interface ChromeAI {
   translator?: {
-    create(options: TranslatorOptions): Promise<Translator>;
-    canTranslate(options: TranslatorOptions): Promise<'readily' | 'after-download' | 'no'>;
+    create(_options: TranslatorOptions): Promise<Translator>;
+    canTranslate(_options: TranslatorOptions): Promise<'readily' | 'after-download' | 'no'>;
   };
   summarizer?: {
-    create(options?: SummarizerOptions): Promise<Summarizer>;
+    create(_options?: SummarizerOptions): Promise<Summarizer>;
     capabilities(): Promise<SummarizerCapabilities>;
   };
   languageModel?: {
-    create(options?: LanguageModelOptions): Promise<LanguageModel>;
+    create(_options?: LanguageModelOptions): Promise<LanguageModel>;
     capabilities(): Promise<LanguageModelCapabilities>;
   };
   writer?: {
-    create(options?: WriterOptions): Promise<Writer>;
+    create(_options?: WriterOptions): Promise<Writer>;
     capabilities(): Promise<WriterCapabilities>;
   };
   rewriter?: {
-    create(options?: RewriterOptions): Promise<Rewriter>;
+    create(_options?: RewriterOptions): Promise<Rewriter>;
     capabilities(): Promise<RewriterCapabilities>;
   };
   languageDetector?: {

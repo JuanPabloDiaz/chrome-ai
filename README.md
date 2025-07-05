@@ -97,7 +97,12 @@ src/
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run format` - Format code with Prettier
+- `npm run format:check` - Check if code is properly formatted
 - `npm run lint` - Lint code with ESLint
+- `npm run lint:fix` - Auto-fix linting issues
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run check-all` - Run all quality checks (typecheck + lint + format check)
+- `npm run clean` - Clean install (remove node_modules and reinstall)
 
 ## 🌟 API Examples
 
