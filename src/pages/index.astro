@@ -4,191 +4,167 @@ import AIHub from '../components/AIHub.tsx';
 ---
 
 <Layout title="Chrome Built-in AI APIs Demo">
-  <main>
-    <h1>Chrome Built-in AI APIs Demo</h1>
-    <p class="intro">
-      This demo showcases Chrome's experimental Built-in AI APIs.
-      <strong>Chrome 138+ desktop required</strong> with flags enabled.
-    </p>
+  <div class="min-h-screen bg-gradient-to-br from-dark-primary to-dark-secondary dark:from-[#0f172a] dark:to-[#1e293b] py-12 px-4 sm:px-6">
+    <header class="max-w-6xl mx-auto mb-12">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-[var(--color-accent)] mb-4">Chrome Built-in AI APIs Demo</h1>
+        <p class="text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto">
+          This demo showcases Chrome's experimental Built-in AI APIs.
+          <span class="font-semibold">Chrome 138+ desktop required</span> with flags enabled.
+        </p>
+      </div>
+    </header>
 
-    <div class="compatibility-notice">
-      <h2>🚀 Setup Required</h2>
-      <ol>
-        <li>
-          Use
-          <a href="https://www.google.com/chrome/canary" target="_blank" rel="noopener noreferrer">
-            Chrome Canary</a
-          >, Dev, or Beta (v138+)
-        </li>
-        <li>Enable flags: <code>chrome://flags/#prompt-api-for-gemini-nano</code></li>
-        <li>
-          <strong>CRITICAL:</strong> Download Gemini Nano model at <code>chrome://components</code>
-          <br /><small
-            >⚠️ If "Optimization Guide On Device Model" is missing, see troubleshooting below</small
-          >
-        </li>
-        <li>
-          Join the <a href="https://developer.chrome.com/docs/ai/get-started" target="_blank"
-            >Early Preview Program</a
-          >
-        </li>
-      </ol>
-    </div>
-
-    <div class="troubleshooting-notice">
-      <h2>🔧 Troubleshooting: Model Not Available</h2>
-      <p><strong>If Chrome AI APIs show as "Unsupported" or `ai` object is undefined:</strong></p>
-      <details>
-        <summary>Click to see solutions</summary>
-        <div class="troubleshooting-content">
-          <h3>Problem: Missing Gemini Nano Model</h3>
-          <p>
-            The most common issue is that "Optimization Guide On Device Model" doesn't appear in <code
-              >chrome://components</code
-            >.
-          </p>
-
-          <h4>Solutions to try:</h4>
-          <ol>
-            <li>
-              <strong>Try BypassPerfRequirement:</strong>
-              <br />Go to <code>chrome://flags/#optimization-guide-on-device-model</code>
-              <br />Set to "Enabled BypassPerfRequirement" if available
-              <br />Restart Chrome and wait 15-30 minutes
-            </li>
-            <li>
-              <strong>Try different Chrome channel:</strong>
-              <br />Download <a href="https://www.google.com/chrome/dev/" target="_blank"
-                >Chrome Dev</a
-              > or <a href="https://www.google.com/chrome/beta/" target="_blank">Chrome Beta</a>
-              <br />Some channels may have better model availability
-            </li>
-            <li>
-              <strong>Wait for gradual rollout:</strong>
-              <br />Google is rolling out the model gradually by region and hardware
-              <br />It may take days or weeks to become available
-            </li>
-            <li>
-              <strong>Check system requirements:</strong>
-              <br />• Desktop only (Windows 10+, macOS 13+, Linux)
-              <br />• 22GB+ free storage
-              <br />• GPU with 4GB+ VRAM
-              <br />• Unmetered internet connection
-            </li>
-          </ol>
-
-          <h4>Alternative: Cloud-based AI</h4>
-          <p>While waiting for Chrome's built-in AI, consider:</p>
-          <ul>
-            <li><a href="https://ai.google.dev/" target="_blank">Google AI Studio</a></li>
-            <li><a href="https://platform.openai.com/" target="_blank">OpenAI API</a></li>
-            <li><a href="https://www.anthropic.com/" target="_blank">Anthropic Claude</a></li>
-          </ul>
+    <main class="max-w-6xl mx-auto space-y-8">
+      <div class="card bg-gradient-to-br from-amber-50/10 to-amber-100/10 border-amber-500/50 dark:from-amber-900/20 dark:to-amber-800/20 dark:border-amber-700/50">
+        <div class="flex items-start gap-4">
+          <div class="p-2 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-xl font-bold text-amber-700 dark:text-amber-400 mb-3">🚀 Setup Required</h2>
+            <ol class="space-y-3 text-[var(--color-text-primary)]">
+              <li class="flex gap-2">
+                <span class="font-mono bg-amber-100/30 dark:bg-amber-900/30 w-6 h-6 flex items-center justify-center rounded-full text-amber-800 dark:text-amber-400 shrink-0">1</span>
+                <span>
+                  Use
+                  <a href="https://www.google.com/chrome/canary" target="_blank" rel="noopener noreferrer" class="text-amber-700 dark:text-amber-400 underline hover:text-amber-500 dark:hover:text-amber-300">
+                    Chrome Canary</a>, Dev, or Beta (v138+)
+                </span>
+              </li>
+              <li class="flex gap-2">
+                <span class="font-mono bg-amber-100/30 dark:bg-amber-900/30 w-6 h-6 flex items-center justify-center rounded-full text-amber-800 dark:text-amber-400 shrink-0">2</span>
+                <span>Enable flags: <code class="px-1.5 py-0.5 rounded bg-amber-100/50 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 text-sm font-mono">chrome://flags/#prompt-api-for-gemini-nano</code></span>
+              </li>
+              <li class="flex gap-2">
+                <span class="font-mono bg-amber-100/30 dark:bg-amber-900/30 w-6 h-6 flex items-center justify-center rounded-full text-amber-800 dark:text-amber-400 shrink-0">3</span>
+                <span>
+                  <span class="font-semibold">CRITICAL:</span> Download Gemini Nano model at <code class="px-1.5 py-0.5 rounded bg-amber-100/50 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 text-sm font-mono">chrome://components</code>
+                  <br /><span class="text-sm text-amber-700/80 dark:text-amber-400/80">⚠️ If "Optimization Guide On Device Model" is missing, see troubleshooting below</span>
+                </span>
+              </li>
+              <li class="flex gap-2">
+                <span class="font-mono bg-amber-100/30 dark:bg-amber-900/30 w-6 h-6 flex items-center justify-center rounded-full text-amber-800 dark:text-amber-400 shrink-0">4</span>
+                <span>
+                  Join the <a href="https://developer.chrome.com/docs/ai/get-started" target="_blank" class="text-amber-700 dark:text-amber-400 underline hover:text-amber-500 dark:hover:text-amber-300">Early Preview Program</a>
+                </span>
+              </li>
+            </ol>
+          </div>
         </div>
-      </details>
-    </div>
+      </div>
 
-    <AIHub client:load />
-  </main>
+      <div class="card bg-gradient-to-br from-rose-50/10 to-rose-100/10 border-rose-500/50 dark:from-rose-900/20 dark:to-rose-800/20 dark:border-rose-700/50">
+        <div class="flex items-start gap-4">
+          <div class="p-2 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-xl font-bold text-rose-700 dark:text-rose-400 mb-3">🔧 Troubleshooting: Model Not Available</h2>
+            <p class="mb-4 text-[var(--color-text-primary)]"><span class="font-semibold">If Chrome AI APIs show as "Unsupported" or `ai` object is undefined:</span></p>
+            
+            <details class="group">
+              <summary class="cursor-pointer font-semibold text-rose-700 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 transition-colors py-2">
+                <span class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                  Click to see solutions
+                </span>
+              </summary>
+              
+              <div class="pt-4 pb-2 border-t border-rose-200 dark:border-rose-800/50 mt-2">
+                <h3 class="text-lg font-semibold text-rose-700 dark:text-rose-400 mb-2">Problem: Missing Gemini Nano Model</h3>
+                <p class="mb-4 text-[var(--color-text-primary)]">
+                  The most common issue is that "Optimization Guide On Device Model" doesn't appear in 
+                  <code class="px-1.5 py-0.5 rounded bg-rose-100/50 dark:bg-rose-900/50 text-rose-800 dark:text-rose-300 text-sm font-mono">chrome://components</code>.
+                </p>
+
+                <h4 class="text-md font-semibold text-rose-700 dark:text-rose-400 mb-2">Solutions to try:</h4>
+                <ol class="space-y-4 text-[var(--color-text-primary)]">
+                  <li class="pl-4 border-l-2 border-rose-300 dark:border-rose-700">
+                    <p class="font-semibold">Try BypassPerfRequirement:</p>
+                    <p class="text-sm mt-1 space-y-1">
+                      <span class="block">Go to <code class="px-1.5 py-0.5 rounded bg-rose-100/50 dark:bg-rose-900/50 text-rose-800 dark:text-rose-300 text-sm font-mono">chrome://flags/#optimization-guide-on-device-model</code></span>
+                      <span class="block">Set to "Enabled BypassPerfRequirement" if available</span>
+                      <span class="block">Restart Chrome and wait 15-30 minutes</span>
+                    </p>
+                  </li>
+                  <li class="pl-4 border-l-2 border-rose-300 dark:border-rose-700">
+                    <p class="font-semibold">Try different Chrome channel:</p>
+                    <p class="text-sm mt-1 space-y-1">
+                      <span class="block">Download 
+                        <a href="https://www.google.com/chrome/dev/" target="_blank" class="text-rose-700 dark:text-rose-400 underline hover:text-rose-500 dark:hover:text-rose-300">Chrome Dev</a> or 
+                        <a href="https://www.google.com/chrome/beta/" target="_blank" class="text-rose-700 dark:text-rose-400 underline hover:text-rose-500 dark:hover:text-rose-300">Chrome Beta</a>
+                      </span>
+                      <span class="block">Some channels may have better model availability</span>
+                    </p>
+                  </li>
+                  <li class="pl-4 border-l-2 border-rose-300 dark:border-rose-700">
+                    <p class="font-semibold">Wait for gradual rollout:</p>
+                    <p class="text-sm mt-1 space-y-1">
+                      <span class="block">Google is rolling out the model gradually by region and hardware</span>
+                      <span class="block">It may take days or weeks to become available</span>
+                    </p>
+                  </li>
+                  <li class="pl-4 border-l-2 border-rose-300 dark:border-rose-700">
+                    <p class="font-semibold">Check system requirements:</p>
+                    <p class="text-sm mt-1 space-y-1">
+                      <span class="block">• Desktop only (Windows 10+, macOS 13+, Linux)</span>
+                      <span class="block">• 22GB+ free storage</span>
+                      <span class="block">• GPU with 4GB+ VRAM</span>
+                      <span class="block">• Unmetered internet connection</span>
+                    </p>
+                  </li>
+                </ol>
+
+                <h4 class="text-md font-semibold text-rose-700 dark:text-rose-400 mt-6 mb-2">Alternative: Cloud-based AI</h4>
+                <p class="mb-2 text-[var(--color-text-primary)]">While waiting for Chrome's built-in AI, consider:</p>
+                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[var(--color-text-primary)]">
+                  <li>
+                    <a href="https://ai.google.dev/" target="_blank" class="flex items-center gap-2 p-2 rounded-lg hover:bg-rose-100/20 dark:hover:bg-rose-900/20 transition-colors">
+                      <span class="p-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                      Google AI Studio
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://platform.openai.com/" target="_blank" class="flex items-center gap-2 p-2 rounded-lg hover:bg-rose-100/20 dark:hover:bg-rose-900/20 transition-colors">
+                      <span class="p-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                      OpenAI API
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.anthropic.com/" target="_blank" class="flex items-center gap-2 p-2 rounded-lg hover:bg-rose-100/20 dark:hover:bg-rose-900/20 transition-colors">
+                      <span class="p-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                      Anthropic Claude
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg-primary)]">
+        <AIHub client:load />
+      </div>
+    </main>
+  </div>
 </Layout>
-
-<style>
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  h1 {
-    color: #2563eb;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .intro {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #64748b;
-    margin-bottom: 2rem;
-  }
-
-  .compatibility-notice {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border: 1px solid #f59e0b;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .compatibility-notice h2 {
-    margin-top: 0;
-    color: #92400e;
-  }
-
-  .compatibility-notice ol {
-    margin: 1rem 0 0;
-  }
-
-  .compatibility-notice code {
-    background: #fbbf24;
-    padding: 0.125rem 0.25rem;
-    border-radius: 4px;
-    font-size: 0.875rem;
-  }
-
-  .compatibility-notice a {
-    color: #92400e;
-    text-decoration: underline;
-  }
-
-  .troubleshooting-notice {
-    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-    border: 1px solid #ef4444;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .troubleshooting-notice h2 {
-    margin-top: 0;
-    color: #dc2626;
-  }
-
-  .troubleshooting-notice details {
-    margin-top: 1rem;
-  }
-
-  .troubleshooting-notice summary {
-    cursor: pointer;
-    font-weight: 600;
-    color: #dc2626;
-    padding: 0.5rem 0;
-  }
-
-  .troubleshooting-notice summary:hover {
-    text-decoration: underline;
-  }
-
-  .troubleshooting-content {
-    padding: 1rem 0;
-    border-top: 1px solid #f87171;
-    margin-top: 0.5rem;
-  }
-
-  .troubleshooting-content h3, .troubleshooting-content h4 {
-    color: #dc2626;
-    margin: 1rem 0 0.5rem 0;
-  }
-
-  .troubleshooting-content code {
-    background: #fca5a5;
-    padding: 0.125rem 0.25rem;
-    border-radius: 4px;
-    font-size: 0.875rem;
-  }
-
-  .troubleshooting-content a {
-    color: #dc2626;
-    text-decoration: underline;
-  }
-</style>
