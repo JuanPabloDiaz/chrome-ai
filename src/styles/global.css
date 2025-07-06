@@ -6,21 +6,33 @@
   :root {
     --color-bg-primary: #f8fafc;
     --color-bg-secondary: #ffffff;
+    --color-bg-hover: #f1f5f9;
     --color-text-primary: #1e293b;
     --color-text-secondary: #64748b;
     --color-accent: #8b5cf6;
     --color-accent-hover: #7c3aed;
     --color-border: #e2e8f0;
+    --gradient-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   }
 
   .dark {
     --color-bg-primary: #1e1e2e;
     --color-bg-secondary: #313244;
+    --color-bg-hover: #45475a;
     --color-text-primary: #cdd6f4;
     --color-text-secondary: #a6adc8;
     --color-accent: #cba6f7;
     --color-accent-hover: #d8b4fe;
     --color-border: #45475a;
+    --gradient-primary: linear-gradient(135deg, #1e1e2e 0%, #313244 100%);
+  }
+
+  html {
+    @apply bg-[var(--color-bg-primary)] text-[var(--color-text-primary)];
+  }
+
+  body {
+    @apply min-h-screen bg-[var(--gradient-primary)];
   }
 }
 

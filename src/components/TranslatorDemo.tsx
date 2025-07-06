@@ -92,20 +92,21 @@ const TranslatorDemo: React.FC = () => {
   };
 
   return (
-    <div className="translator-demo">
-      <div className="demo-header">
-        <h3>🌍 Chrome AI Translator</h3>
-        <p>Translate text between languages using Chrome's built-in AI translation.</p>
+    <div className="w-full">
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold mb-2 text-[var(--color-text-primary)]">🌍 Chrome AI Translator</h3>
+        <p className="text-[var(--color-text-secondary)]">Translate text between languages using Chrome's built-in AI translation.</p>
       </div>
 
-      <div className="translation-container">
-        <div className="language-selector">
-          <div className="language-select">
-            <label htmlFor="source-lang">From:</label>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-wrap items-end gap-4">
+          <div className="flex flex-col gap-2 min-w-[150px]">
+            <label htmlFor="source-lang" className="font-medium text-[var(--color-text-primary)]">From:</label>
             <select
               id="source-lang"
               value={sourceLanguage}
               onChange={e => setSourceLanguage(e.target.value)}
+              className="bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-lg p-2 text-[var(--color-text-primary)]"
             >
               {languages.map(lang => (
                 <option key={lang.code} value={lang.code}>
@@ -115,16 +116,21 @@ const TranslatorDemo: React.FC = () => {
             </select>
           </div>
 
-          <button className="swap-button" onClick={swapLanguages} title="Swap languages">
+          <button 
+            className="bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)] rounded-lg p-2 px-4 text-xl hover:bg-[var(--color-bg-hover)] hover:text-[var(--color-text-primary)] transition-colors mt-6"
+            onClick={swapLanguages} 
+            title="Swap languages"
+          >
             ⇄
           </button>
 
-          <div className="language-select">
-            <label htmlFor="target-lang">To:</label>
+          <div className="flex flex-col gap-2 min-w-[150px]">
+            <label htmlFor="target-lang" className="font-medium text-[var(--color-text-primary)]">To:</label>
             <select
               id="target-lang"
               value={targetLanguage}
               onChange={e => setTargetLanguage(e.target.value)}
+              className="bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-lg p-2 text-[var(--color-text-primary)]"
             >
               {languages.map(lang => (
                 <option key={lang.code} value={lang.code}>
@@ -135,196 +141,55 @@ const TranslatorDemo: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-areas">
-          <div className="input-section">
-            <label htmlFor="source-text">Source Text:</label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="source-text" className="font-medium text-[var(--color-text-primary)]">Source Text:</label>
             <textarea
               id="source-text"
               value={sourceText}
               onChange={e => setSourceText(e.target.value)}
               placeholder="Enter text to translate..."
               rows={6}
+              className="bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-lg p-3 text-[var(--color-text-primary)] resize-y min-h-[120px] focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] outline-none"
             />
           </div>
 
-          <div className="output-section">
-            <label htmlFor="translated-text">Translation:</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="translated-text" className="font-medium text-[var(--color-text-primary)]">Translation:</label>
             <textarea
               id="translated-text"
               value={translatedText}
               readOnly
               placeholder="Translation will appear here..."
               rows={6}
+              className="bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-lg p-3 text-[var(--color-text-primary)] resize-y min-h-[120px] opacity-90"
             />
           </div>
         </div>
 
-        <div className="controls">
+        <div className="flex flex-wrap gap-4">
           <button
             onClick={translateText}
             disabled={isTranslating || !sourceText.trim()}
-            className="translate-button"
+            className={`flex-1 min-w-[150px] bg-[var(--color-accent)] text-white py-2 px-4 rounded-lg font-medium transition-colors ${isTranslating || !sourceText.trim() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[var(--color-accent-hover)]'}`}
           >
             {isTranslating ? 'Translating...' : 'Translate'}
           </button>
 
-          <button onClick={clearAll} className="clear-button">
+          <button 
+            onClick={clearAll} 
+            className="bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] border border-[var(--color-border)] py-2 px-4 rounded-lg font-medium hover:bg-[var(--color-bg-hover)] transition-colors"
+          >
             Clear
           </button>
         </div>
 
         {error && (
-          <div className="error-message">
-            <strong>Error:</strong> {error}
+          <div className="p-4 bg-red-900/20 border border-red-800 rounded-lg text-red-400">
+            <strong className="font-bold text-red-300">Error:</strong> {error}
           </div>
         )}
       </div>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        .translator-demo {
-          width: 100%;
-        }
-
-        .demo-header {
-          margin-bottom: 2rem;
-        }
-
-        .demo-header h3 {
-          margin: 0 0 0.5rem 0;
-          color: #1f2937;
-          font-size: 1.5rem;
-        }
-
-        .demo-header p {
-          margin: 0;
-          color: #6b7280;
-        }
-
-        .translation-container {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .language-selector {
-          display: flex;
-          align-items: end;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .language-select {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          min-width: 150px;
-        }
-
-        .language-select label {
-          font-weight: 500;
-          color: #374151;
-        }
-
-        .swap-button {
-          background: #f3f4f6;
-          color: #6b7280;
-          border: 1px solid #d1d5db;
-          padding: 0.5rem 1rem;
-          font-size: 1.2rem;
-          margin-top: 1.5rem;
-        }
-
-        .swap-button:hover {
-          background: #e5e7eb;
-          color: #374151;
-        }
-
-        .text-areas {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-          .text-areas {
-            grid-template-columns: 1fr;
-          }
-          
-          .language-selector {
-            flex-direction: column;
-            align-items: stretch;
-          }
-          
-          .language-select {
-            min-width: auto;
-          }
-        }
-
-        .input-section,
-        .output-section {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-
-        .input-section label,
-        .output-section label {
-          font-weight: 500;
-          color: #374151;
-        }
-
-        .input-section textarea,
-        .output-section textarea {
-          resize: vertical;
-          min-height: 120px;
-        }
-
-        .output-section textarea {
-          background: #f9fafb;
-        }
-
-        .controls {
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .translate-button {
-          background: #2563eb;
-          color: white;
-          flex: 1;
-          min-width: 150px;
-        }
-
-        .translate-button:hover:not(:disabled) {
-          background: #1d4ed8;
-        }
-
-        .clear-button {
-          background: #6b7280;
-          color: white;
-        }
-
-        .clear-button:hover {
-          background: #4b5563;
-        }
-
-        .error-message {
-          padding: 1rem;
-          background: #fef2f2;
-          border: 1px solid #fecaca;
-          border-radius: 8px;
-          color: #dc2626;
-        }
-
-        .error-message strong {
-          color: #991b1b;
-        }
-      `,
-        }}
-      />
     </div>
   );
 };
